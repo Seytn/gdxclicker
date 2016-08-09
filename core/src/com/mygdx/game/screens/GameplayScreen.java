@@ -36,6 +36,8 @@ public class GameplayScreen extends AbstractScreen{
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
                 player.reactOnClick();
+                game.addPoint();
+
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
