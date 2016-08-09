@@ -1,7 +1,10 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.Player;
@@ -13,12 +16,22 @@ public class GameplayScreen extends AbstractScreen{
 
     private Player player;
     private Button playerButton;
+    private Label scoreLabel;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
 
         initPlayer();
         initPlayerButton();
+        initScoreLabel();
+
+    }
+
+    private void initScoreLabel() {
+        scoreLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.RED));
+        scoreLabel.setX(20);
+        scoreLabel.setY(600);
+        stage.addActor(scoreLabel);
     }
 
     private void initPlayerButton() {
