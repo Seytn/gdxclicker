@@ -12,9 +12,13 @@ public class GameplayScreen extends AbstractScreen{
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
-        
-        init();
+
         initPlayer();
+    }
+
+    @Override
+    protected void init() {
+
     }
 
     private void initPlayer() {
@@ -22,8 +26,6 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(player);
     }
 
-    private void init() {
-    }
 
     @Override
     public void render(float delta) {
