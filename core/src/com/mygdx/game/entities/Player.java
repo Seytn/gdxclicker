@@ -1,6 +1,10 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
@@ -24,4 +28,20 @@ public class Player extends Image {
         this.setPosition(STARTING_X, STARTING_Y);
 
     }
+
+    public void reactOnClick() {
+        int moveAmount = MathUtils.random(-100,100);
+        Action moveAction = Actions.sequence(
+            Actions.moveBy(moveAmount, 15, 0.5f, Interpolation.circleIn),
+            Actions.moveBy(-moveAmount, -15, 0.5f, Interpolation.circleOut)
+        );
+
+        int sizeAmount = MathUtils.random(0,50);
+        Action changeSizeAction = Actions.sequence(
+                Actions.sizeBy(sizeAmount, 15, 0.5f, Interpolation.circle),
+                Actions.sizeBy(-sizeAmount, -15, 0.5f, Interpolation.circleOut)
+        );
+
+        this.addAction(moveAction);
+        this.addAction(changeSizeAction);    }
 }
