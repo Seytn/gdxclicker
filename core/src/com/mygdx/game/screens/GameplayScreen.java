@@ -2,13 +2,12 @@ package com.mygdx.game.screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.Player;
-import com.mygdx.game.ui.*;
+import com.mygdx.game.ui.ButtonClickCallback;
+import com.mygdx.game.ui.PlayerButton;
+import com.mygdx.game.ui.ResetScoreButton;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -17,7 +16,7 @@ public class GameplayScreen extends AbstractScreen{
 
     private Player player;
     private PlayerButton playerButton;
-    private Button resetScoreButon;
+    private ResetScoreButton resetScoreButon;
     private Label scoreLabel;
 
     public GameplayScreen(ClickerGdxGame game) {
@@ -58,24 +57,18 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initResetScoreButton() {
-        resetScoreButon = new Button(new Button.ButtonStyle());
-        resetScoreButon.setWidth(100);
-        resetScoreButon.setHeight(100);
-        resetScoreButon.setX(330);
-        resetScoreButon.setY(500);
-        resetScoreButon.setDebug(true);
+        resetScoreButon = new ResetScoreButton(new ButtonClickCallback() {
+            @Override
+            public void onClick() {
+                game.resetScore();
+                scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
+            }
+        });
+
 
         stage.addActor(resetScoreButon);
 
-        resetScoreButon.addListener(new ClickListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                game.resetScore();
-
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
 
     }
 
