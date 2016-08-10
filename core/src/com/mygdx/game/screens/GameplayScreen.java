@@ -16,19 +16,26 @@ public class GameplayScreen extends AbstractScreen{
 
     private Player player;
     private Button playerButton;
+    private Button resetScoreButon;
     private Label scoreLabel;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
 
-        initPlayer();
-        initPlayerButton();
-        initScoreLabel();
 
     }
 
+    @Override
+    protected void init() {
+        initPlayer();
+        initPlayerButton();
+        initResetScoreButton();
+        initScoreLabel();
+    }
+
     private void initScoreLabel() {
-        scoreLabel = new Label("Points: " + String.valueOf(game.getPoints()), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        scoreLabel = new Label("Points: " + String.valueOf(game.getPoints()),
+                new Label.LabelStyle(new BitmapFont(), Color.RED));
         scoreLabel.setX(20);
         scoreLabel.setY(600);
         stage.addActor(scoreLabel);
@@ -39,7 +46,7 @@ public class GameplayScreen extends AbstractScreen{
         playerButton.setWidth(460);
         playerButton.setHeight(360);
         playerButton.setX(10);
-        playerButton.setY(170);
+        playerButton.setY(100);
         playerButton.setDebug(true);
 
         stage.addActor(playerButton);
@@ -57,8 +64,25 @@ public class GameplayScreen extends AbstractScreen{
         });
     }
 
-    @Override
-    protected void init() {
+    private void initResetScoreButton() {
+        resetScoreButon = new Button(new Button.ButtonStyle());
+        resetScoreButon.setWidth(100);
+        resetScoreButon.setHeight(100);
+        resetScoreButon.setX(330);
+        resetScoreButon.setY(500);
+        resetScoreButon.setDebug(true);
+
+        stage.addActor(resetScoreButon);
+
+        resetScoreButon.addListener(new ClickListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                game.resetScore();
+
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
 
     }
 
