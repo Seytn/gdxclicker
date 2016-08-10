@@ -47,5 +47,7 @@ public class Player extends Image {
         );
 
         this.addAction(moveAction);
-        this.addAction(changeSizeAction);    }
+        this.addAction(changeSizeAction);
+
+    }
 }
