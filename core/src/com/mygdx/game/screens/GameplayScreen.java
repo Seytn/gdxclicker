@@ -1,13 +1,11 @@
 package com.mygdx.game.screens;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.ui.ButtonClickCallback;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
+import com.mygdx.game.ui.ScoreLabel;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -17,7 +15,7 @@ public class GameplayScreen extends AbstractScreen{
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
-    private Label scoreLabel;
+    private ScoreLabel scoreLabel;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -34,10 +32,8 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initScoreLabel() {
-        scoreLabel = new Label("Points: " + String.valueOf(game.getPoints()),
-                new Label.LabelStyle(new BitmapFont(), Color.RED));
-        scoreLabel.setX(20);
-        scoreLabel.setY(600);
+        scoreLabel = new ScoreLabel("Points: " + String.valueOf(game.getPoints()));
+
         stage.addActor(scoreLabel);
     }
 
@@ -65,10 +61,7 @@ public class GameplayScreen extends AbstractScreen{
             }
         });
 
-
         stage.addActor(resetScoreButon);
-
-
 
     }
 
