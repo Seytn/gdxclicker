@@ -28,7 +28,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initScoreLabel() {
-        scoreLabel = new Label("", new Label.LabelStyle(new BitmapFont(), Color.RED));
+        scoreLabel = new Label("Points: " + String.valueOf(game.getPoints()), new Label.LabelStyle(new BitmapFont(), Color.RED));
         scoreLabel.setX(20);
         scoreLabel.setY(600);
         stage.addActor(scoreLabel);
