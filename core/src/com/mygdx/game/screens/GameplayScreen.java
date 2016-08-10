@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.Player;
+import com.mygdx.game.ui.*;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -15,7 +16,7 @@ import com.mygdx.game.entities.Player;
 public class GameplayScreen extends AbstractScreen{
 
     private Player player;
-    private Button playerButton;
+    private PlayerButton playerButton;
     private Button resetScoreButon;
     private Label scoreLabel;
 
@@ -42,26 +43,18 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initPlayerButton() {
-        playerButton = new Button(new Button.ButtonStyle());
-        playerButton.setWidth(460);
-        playerButton.setHeight(360);
-        playerButton.setX(10);
-        playerButton.setY(100);
-        playerButton.setDebug(true);
-
-        stage.addActor(playerButton);
-
-        playerButton.addListener(new ClickListener(){
+        playerButton = new PlayerButton(new ButtonClickCallback() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
+            public void onClick() {
                 player.reactOnClick();
                 game.addPoint();
                 scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
-
-                return super.touchDown(event, x, y, pointer, button);
             }
         });
+
+        stage.addActor(playerButton);
+
+
     }
 
     private void initResetScoreButton() {
