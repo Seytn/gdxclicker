@@ -22,8 +22,8 @@ public class Player extends Image {
     private final static int STARTING_Y = 300;
 
     boolean isPlayerMovedLeft = false;
-    boolean isPlayerMovedRight = true;
     int xSide = WIDTH;
+    Action changeSideAction;
 
     public Player() {
         super(new Texture("player.png"));
@@ -36,52 +36,43 @@ public class Player extends Image {
     }
 
     public void reactOnClick() {
+
+
         int xMoveAmount = MathUtils.random(-120,120);
         int yMoveAmount = 25;
         float actionTime = 0.4f;
 
-        Action moveAction = Actions.sequence(
-            Actions.moveBy(xMoveAmount, yMoveAmount, actionTime, Interpolation.circleIn),
-            Actions.moveBy(-xMoveAmount, -yMoveAmount, actionTime, Interpolation.circleOut)
-
-        );
-
-        int xSizeAmount = 0;
-        int ySizeAmount = abs(xMoveAmount/2);
-        Action changeSizeAction = Actions.sequence(
-                Actions.sizeBy(xSizeAmount, ySizeAmount, actionTime, Interpolation.circle),
-                Actions.sizeBy(-xSizeAmount, -ySizeAmount, actionTime, Interpolation.circleOut)
-        );
-
-
-
-
         if (xMoveAmount < 0 && !isPlayerMovedLeft) {
             xSide = -WIDTH;
+            this.setWidth(xSide);
             float x = this.getX();
             this.setX(x + WIDTH);
             isPlayerMovedLeft = true;
 
-
         } else if(xMoveAmount > 0 && isPlayerMovedLeft) {
             xSide = WIDTH;
+            this.setWidth(xSide);
             float x = this.getX();
             this.setX(x - WIDTH);
             isPlayerMovedLeft = false;
 
         }
 
+        Action moveAction = Actions.sequence(
+            Actions.moveBy(xMoveAmount, yMoveAmount, actionTime, Interpolation.circleOut),
+            Actions.moveBy(-xMoveAmount, -yMoveAmount, actionTime, Interpolation.circleIn)
 
-        Action changeSideAction = Actions.sequence(
-                    Actions.sizeTo(xSide, HEIGHT, 0)
+        );
 
+        int xSizeAmount = MathUtils.random(0,50);
+        if (isPlayerMovedLeft) xSizeAmount = -xSizeAmount;
+        int ySizeAmount = abs(xMoveAmount/3);
+        Action changeSizeAction = Actions.sequence(
+                Actions.sizeBy(xSizeAmount, ySizeAmount, actionTime, Interpolation.circleOut),
+                Actions.sizeBy(-xSizeAmount, -ySizeAmount, actionTime, Interpolation.circleIn)
 
-            );
+        );
 
-
-
-
-        this.addAction(changeSideAction);
         this.addAction(moveAction);
         this.addAction(changeSizeAction);
 
