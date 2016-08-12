@@ -12,7 +12,7 @@ public class ClickerGdxGame extends Game {
     public static final String GAME_NAME = "Clicker";
 
     public static final int WIDTH = 480;
-    public static final int HEIGHT = 700;
+    public static final int HEIGHT = 800;
 
     private boolean paused;
 
