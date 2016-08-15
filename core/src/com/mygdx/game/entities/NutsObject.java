@@ -1,6 +1,7 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -14,8 +15,8 @@ import com.mygdx.game.ClickerGdxGame;
 public class NutsObject extends Image {
 
     public enum NutType{
-        SIMPLE_NUT(120,97),
-        FALLING_NUT(80,150);
+        SIMPLE_NUT(90,70),
+        FALLING_NUT(60,110);
 
         int width, height;
 
@@ -102,10 +103,14 @@ public class NutsObject extends Image {
         Action fall;
         switch(type) {
             case SIMPLE_NUT: {
-                fall = Actions.sequence(
-                        Actions.sizeBy(0.5f, 0.5f, 0.5f),
-                        Actions.sizeBy(-0.5f, -0.5f, -0.5f)
-                );
+                float randomDirectionX = MathUtils.random(-30f,30f);
+                float randomDirectionY = MathUtils.random(-30f,30f);
+
+                fall = Actions.forever(Actions.sequence(
+                        Actions.sizeBy(10f, 10f, 0.5f),
+                        Actions.sizeBy(-10f, -10f, 0),
+                        Actions.moveBy(randomDirectionX, randomDirectionY, 0.5f)
+                ));
                 break;
             }
             case FALLING_NUT: {

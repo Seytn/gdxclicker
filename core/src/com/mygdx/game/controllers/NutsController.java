@@ -18,7 +18,7 @@ public class NutsController {
     NutsObject nut;
     int startingX;
     int startingY;
-    int fallingStartingY;
+    int fallingNutsStartingY;
 
     public NutsController(ClickerGdxGame game, Stage stage) {
         this.game = game;
@@ -43,7 +43,7 @@ public class NutsController {
                     }
                 },spawnTime);
             }
-        },0,1);
+        },0,0.3f);
 
     }
 
@@ -51,11 +51,11 @@ public class NutsController {
         nut = null;
         startingX = MathUtils.random(15,420);
         startingY = MathUtils.random(15,750);
-        fallingStartingY = 820;
+        fallingNutsStartingY = 820;
         NutsObject.NutType randomType = NutsObject.NutType.getRandom();
         switch(randomType){
             case FALLING_NUT: {
-                nut = new NutsObject(NutsObject.NutType.FALLING_NUT, game, startingX, fallingStartingY);
+                nut = new NutsObject(NutsObject.NutType.FALLING_NUT, game, startingX, fallingNutsStartingY);
                 break;
                }
             case SIMPLE_NUT: {
