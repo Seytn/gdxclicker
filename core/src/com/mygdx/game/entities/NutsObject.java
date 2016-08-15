@@ -15,7 +15,17 @@ import com.mygdx.game.ui.clickCallback;
 public class NutsObject extends Image {
 
     public enum NutType{
-        SIMPLE_NUT, FALLING_NUT
+        SIMPLE_NUT(120,97,50,100), FALLING_NUT(80,150,235,370);
+
+        int width, height, startingX, startingY;
+
+        NutType(int width, int height, int startingX, int startingY){
+            this.width = width;
+            this.height = height;
+            this.startingX = startingX;
+            this.startingY = startingY;
+        }
+
     }
 
     public final static String SIMPLE_NUT = "nut.png";
@@ -23,11 +33,11 @@ public class NutsObject extends Image {
 
     private ClickerGdxGame game;
 
-    private final static int WIDTH = 120;
-    private final static int HEIGHT = 97;
+    //private final static int WIDTH = 120;
+    //private final static int HEIGHT = 97;
 
-    private final static int STARTING_X = 50;
-    private final static int STARTING_Y = 100;
+    //private final static int STARTING_X = 50;
+    //private final static int STARTING_Y = 100;
 
     private NutType type;
 
@@ -37,10 +47,10 @@ public class NutsObject extends Image {
         this.game = game;
         this.type = type;
 
-        this.setOrigin(WIDTH/2, HEIGHT/2);
-        this.setSize(WIDTH, HEIGHT);
+        this.setOrigin(type.width/2, type.height/2);
+        this.setSize(type.width, type.height);
 
-        this.setPosition(STARTING_X, STARTING_Y);
+        this.setPosition(type.startingX, type.startingY);
 
         this.addListener(new ClickListener(){
             @Override

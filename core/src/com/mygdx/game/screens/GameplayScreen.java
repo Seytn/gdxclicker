@@ -21,6 +21,7 @@ public class GameplayScreen extends AbstractScreen{
     private ResetScoreButton resetScoreButon;
     private ScoreLabel scoreLabel;
     private NutsObject nut;
+    private NutsObject nut2;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -40,7 +41,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initNutsObjects() {
-        nut = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, new clickCallback() {
+        nut = new NutsObject(NutsObject.NutType.FALLING_NUT, game, new clickCallback() {
             @Override
             public void onClick() {
                 nut.reactOnClick();
@@ -49,6 +50,16 @@ public class GameplayScreen extends AbstractScreen{
         });
         stage.addActor(nut);
         nut.tremble();
+
+        nut2 = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, new clickCallback() {
+            @Override
+            public void onClick() {
+                nut2.reactOnClick();
+                updateScoreLabel();
+            }
+        });
+        stage.addActor(nut2);
+        nut2.tremble();
     }
 
     private void initBackground() {
