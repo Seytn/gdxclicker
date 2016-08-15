@@ -40,7 +40,7 @@ public class ResetScoreButton extends Button {
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-orange.atlas"));
         Skin skin = new Skin(atlas);
         ButtonStyle buttonStyle = new ButtonStyle();
-        buttonStyle.up = skin.getDrawable("button_03");
+        buttonStyle.up = skin.getDrawable("color_lightwidgettext");
         buttonStyle.down = skin.getDrawable("button_01");
 
         return buttonStyle;
