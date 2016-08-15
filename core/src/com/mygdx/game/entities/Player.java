@@ -14,6 +14,7 @@ import static java.lang.Math.abs;
  */
 public class Player extends Image {
 
+    public final static String PLAYER_TEXTURE = "player.png";
 
     private final static int WIDTH = 150;
     private final static int HEIGHT = 141;
@@ -23,10 +24,9 @@ public class Player extends Image {
 
     boolean isPlayerMovedLeft = false;
     int xSide = WIDTH;
-    Action changeSideAction;
 
     public Player() {
-        super(new Texture("player.png"));
+        super(new Texture(PLAYER_TEXTURE));
 
         this.setOrigin(WIDTH/2, HEIGHT/2);
         this.setSize(WIDTH, HEIGHT);
