@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.ClickerGdxGame;
+import com.mygdx.game.entities.NutsObject;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.ui.ButtonClickCallback;
 import com.mygdx.game.ui.PlayerButton;
@@ -19,6 +20,7 @@ public class GameplayScreen extends AbstractScreen{
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
     private ScoreLabel scoreLabel;
+    private NutsObject nut;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -33,11 +35,19 @@ public class GameplayScreen extends AbstractScreen{
         initPlayerButton();
         initResetScoreButton();
         initScoreLabel();
+        initNutsObjects();
 
+    }
+
+    private void initNutsObjects() {
+        nut = new NutsObject(NutsObject.NUT);
+        stage.addActor(nut);
+        nut.tremble();
     }
 
     private void initBackground() {
         backgroundImg = new Image(new Texture("background_gameplay.png"));
+
         stage.addActor(backgroundImg);
     }
 
