@@ -12,14 +12,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Kamil on 2016-08-10.
  */
 public class ResetScoreButton extends Button {
-    public ResetScoreButton(final ButtonClickCallback callback) {
+    public ResetScoreButton(final clickCallback callback) {
         super(new ButtonStyle(prepareResetButtonStyle()));
 
         init(callback);
 
     }
 
-    private void init(final ButtonClickCallback callback) {
+    private void init(final clickCallback callback) {
         this.setWidth(100);
         this.setHeight(100);
         this.setX(370);

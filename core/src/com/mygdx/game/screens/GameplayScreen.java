@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.NutsObject;
 import com.mygdx.game.entities.Player;
-import com.mygdx.game.ui.ButtonClickCallback;
+import com.mygdx.game.ui.clickCallback;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
 import com.mygdx.game.ui.ScoreLabel;
@@ -40,7 +40,13 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initNutsObjects() {
-        nut = new NutsObject(NutsObject.NUT);
+        nut = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, new clickCallback() {
+            @Override
+            public void onClick() {
+                nut.reactOnClick();
+                updateScoreLabel();
+            }
+        });
         stage.addActor(nut);
         nut.tremble();
     }
@@ -58,12 +64,12 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initPlayerButton() {
-        playerButton = new PlayerButton(new ButtonClickCallback() {
+        playerButton = new PlayerButton(new clickCallback() {
             @Override
             public void onClick() {
                 player.reactOnClick();
                 game.addPoint();
-                scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
+                updateScoreLabel();
             }
         });
 
@@ -73,11 +79,11 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initResetScoreButton() {
-        resetScoreButon = new ResetScoreButton(new ButtonClickCallback() {
+        resetScoreButon = new ResetScoreButton(new clickCallback() {
             @Override
             public void onClick() {
                 game.resetScore();
-                scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
+                updateScoreLabel();
             }
         });
 
@@ -90,7 +96,6 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(player);
     }
 
-
     @Override
     public void render(float delta) {
         super.render(delta);
@@ -101,6 +106,11 @@ public class GameplayScreen extends AbstractScreen{
         stage.draw();
         spriteBatch.end();
 
+    }
+
+
+    private void updateScoreLabel() {
+        scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
     }
 
     private void update() {
