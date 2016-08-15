@@ -19,7 +19,7 @@ public class Player extends Image {
     private final static int WIDTH = 150;
     private final static int HEIGHT = 141;
 
-    private final static int STARTING_X = 185;
+    private final static int STARTING_X = 85;
     private final static int STARTING_Y = 300;
 
     boolean isPlayerMovedLeft = false;

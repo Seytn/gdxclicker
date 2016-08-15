@@ -3,12 +3,12 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.ClickerGdxGame;
-import com.mygdx.game.entities.NutsObject;
+import com.mygdx.game.controllers.NutsController;
 import com.mygdx.game.entities.Player;
-import com.mygdx.game.ui.clickCallback;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
 import com.mygdx.game.ui.ScoreLabel;
+import com.mygdx.game.ui.clickCallback;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -20,8 +20,7 @@ public class GameplayScreen extends AbstractScreen{
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
     private ScoreLabel scoreLabel;
-    private NutsObject nut;
-    private NutsObject nut2;
+    private NutsController nutsController;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -36,31 +35,14 @@ public class GameplayScreen extends AbstractScreen{
         initPlayerButton();
         initResetScoreButton();
         initScoreLabel();
-        initNutsObjects();
+        initNutsController();
+    }
+
+    private void initNutsController() {
+        nutsController = new NutsController(game, stage);
 
     }
 
-    private void initNutsObjects() {
-        nut = new NutsObject(NutsObject.NutType.FALLING_NUT, game, new clickCallback() {
-            @Override
-            public void onClick() {
-                nut.reactOnClick();
-                updateScoreLabel();
-            }
-        });
-        stage.addActor(nut);
-        nut.tremble();
-
-        nut2 = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, new clickCallback() {
-            @Override
-            public void onClick() {
-                nut2.reactOnClick();
-                updateScoreLabel();
-            }
-        });
-        stage.addActor(nut2);
-        nut2.tremble();
-    }
 
     private void initBackground() {
         backgroundImg = new Image(new Texture("background_gameplay.png"));
@@ -120,12 +102,12 @@ public class GameplayScreen extends AbstractScreen{
     }
 
 
-    private void updateScoreLabel() {
+    public void updateScoreLabel() {
         scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
     }
 
     private void update() {
-
+        updateScoreLabel();
         stage.act();
     }
 }
