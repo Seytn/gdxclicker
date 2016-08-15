@@ -56,7 +56,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initScoreLabel() {
-        scoreLabel = new ScoreLabel("Points: " + String.valueOf(game.getPoints()));
+        scoreLabel = new ScoreLabel("Points: " + String.valueOf(game.getScoreService().getPoints()));
 
         stage.addActor(scoreLabel);
     }
@@ -67,7 +67,7 @@ public class GameplayScreen extends AbstractScreen{
             public void onClick() {
                 player.reactOnClick();
                 game.getSoundService().playPlayerClickSound();
-                game.addPoint();
+                game.getScoreService().addPoint();
                 updateScoreLabel();
             }
         });
@@ -81,7 +81,7 @@ public class GameplayScreen extends AbstractScreen{
         resetScoreButon = new ResetScoreButton(new clickCallback() {
             @Override
             public void onClick() {
-                game.resetScore();
+                game.getScoreService().resetScore();
                 updateScoreLabel();
             }
         });
@@ -109,7 +109,7 @@ public class GameplayScreen extends AbstractScreen{
 
 
     public void updateScoreLabel() {
-        scoreLabel.setText("Points: " + String.valueOf(game.getPoints()));
+        scoreLabel.setText("Points: " + String.valueOf(game.getScoreService().getPoints()));
     }
 
     private void update() {

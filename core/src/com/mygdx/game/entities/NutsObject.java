@@ -77,18 +77,16 @@ public class NutsObject extends Image {
                 break;
             }
         }
-
-
     }
 
     public void reactOnClick() {
         switch(type){
             case SIMPLE_NUT: {
-                game.addPoints(10);
+                game.getScoreService().addPoints(10);
                 break;
             }
             case FALLING_NUT: {
-                game.addPoints(30);
+                game.getScoreService().addPoints(30);
                 break;
             }
         }

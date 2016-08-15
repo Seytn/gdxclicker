@@ -32,7 +32,7 @@ public class SoundService {
     public void playMusic() {
         music.play();
         music.setLooping(true);
-        music.setVolume(0.5f);
+        music.setVolume(0.3f);
     }
 
     public void playSimpleNutSpawnSound(){
