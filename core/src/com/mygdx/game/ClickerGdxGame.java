@@ -38,6 +38,11 @@ public class ClickerGdxGame extends Game {
         updateSavedScore();
     }
 
+    public void addPoints(int nutPoints) {
+        points += nutPoints;
+        updateSavedScore();
+    }
+
     public void resetScore() {
         points = 0;
         updateSavedScore();
