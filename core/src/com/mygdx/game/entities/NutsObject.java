@@ -53,6 +53,8 @@ public class NutsObject extends Image {
 
         this.setPosition(startingX, startingY);
 
+        playSound();
+                
         this.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -64,8 +66,22 @@ public class NutsObject extends Image {
         });
     }
 
-    public void reactOnClick() {
+    private void playSound() {
+        switch(type){
+            case SIMPLE_NUT: {
+                game.getSoundService().playNutSpawnSound();
+                break;
+            }
+            case FALLING_NUT: {
+                game.getSoundService().playNutSpawnSound();
+                break;
+            }
+        }
 
+
+    }
+
+    public void reactOnClick() {
         switch(type){
             case SIMPLE_NUT: {
                 game.addPoints(10);

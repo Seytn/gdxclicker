@@ -43,7 +43,7 @@ public class NutsController {
                     }
                 },spawnTime);
             }
-        },0,0.3f);
+        },0,1f);
 
     }
 
@@ -72,6 +72,6 @@ public class NutsController {
     }
 
     private void randomizeSpawnTime() {
-        spawnTime = MathUtils.random(1.0f,3.0f);
+        spawnTime = MathUtils.random(1.0f,5.0f);
     }
 }
