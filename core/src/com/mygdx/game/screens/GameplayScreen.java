@@ -36,6 +36,11 @@ public class GameplayScreen extends AbstractScreen{
         initResetScoreButton();
         initScoreLabel();
         initNutsController();
+        initMusic();
+    }
+
+    private void initMusic() {
+        game.getSoundService().playMusic();
     }
 
     private void initNutsController() {
@@ -61,6 +66,7 @@ public class GameplayScreen extends AbstractScreen{
             @Override
             public void onClick() {
                 player.reactOnClick();
+                game.getSoundService().playPlayerClickSound();
                 game.addPoint();
                 updateScoreLabel();
             }

@@ -40,7 +40,7 @@ public class NutsObject extends Image {
 
     private NutType type;
 
-    public NutsObject(NutType type, ClickerGdxGame game, int startingX, int startingY) {
+    public NutsObject(NutType type, final ClickerGdxGame game, int startingX, int startingY) {
         super(new Texture(getTextureString(type)));
 
         this.game = game;
@@ -69,11 +69,11 @@ public class NutsObject extends Image {
     private void playSound() {
         switch(type){
             case SIMPLE_NUT: {
-                game.getSoundService().playNutSpawnSound();
+                game.getSoundService().playSimpleNutSpawnSound();
                 break;
             }
             case FALLING_NUT: {
-                game.getSoundService().playNutSpawnSound();
+                game.getSoundService().playFallingNutSpawnSound();
                 break;
             }
         }
@@ -92,7 +92,7 @@ public class NutsObject extends Image {
                 break;
             }
         }
-
+        game.getSoundService().playEatSound();
         NutsObject.this.remove();
     }
 
