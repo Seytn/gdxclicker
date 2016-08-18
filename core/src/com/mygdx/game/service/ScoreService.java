@@ -25,20 +25,17 @@ public class ScoreService {
 
     public void addPoint(){
         points++;
-        updateSavedScore();
     }
 
     public void addPoints(int nutPoints) {
         points += nutPoints;
-        updateSavedScore();
     }
 
     public void resetScore() {
         points = 0;
-        updateSavedScore();
     }
 
-    private void updateSavedScore() {
+    public void updateSavedScore() {
         prefs.putInteger(GAME_SCORE, points);
         prefs.flush();
     }
