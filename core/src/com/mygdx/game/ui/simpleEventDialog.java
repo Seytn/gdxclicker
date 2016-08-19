@@ -37,7 +37,7 @@ public class SimpleEventDialog extends Image {
     }
 
     private void init() {
-        label = new SimpleLabel("O kurwa");
+        label = new SimpleLabel("");
         label.setPosition(STARTING_X + 30, STARTING_Y + 5);
 
 
@@ -55,10 +55,11 @@ public class SimpleEventDialog extends Image {
     public void showMessage(String text) {
         stage.addActor(this);
         label.setText(text);
+        label.setFontScale(1.2f);
         this.getStage().addActor(label);
     }
 
-    private void fadeOutDialog() {
+    public void fadeOutDialog() {
         Action disapear = Actions.sequence(
                 Actions.fadeOut(0.3f),
                 new Action() {

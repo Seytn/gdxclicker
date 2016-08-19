@@ -121,6 +121,19 @@ public class NutsObject extends Image {
     private void warnDialog() {
         poisonClieckedDialog = new SimpleEventDialog(getStage());
         poisonClieckedDialog.showMessage("You've clicked a pepper!!! -100pts");
+        Action disapearAction = Actions.sequence(
+                Actions.delay(0.5f),
+                new Action(){
+                    @Override
+                    public boolean act(float delta) {
+                        poisonClieckedDialog.fadeOutDialog();
+                        return false;
+                    }
+                }
+
+
+        );
+        poisonClieckedDialog.addAction(disapearAction);
     }
 
 
