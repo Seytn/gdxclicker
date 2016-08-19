@@ -22,9 +22,6 @@ public class Player extends Image {
     private final static int STARTING_X = 85;
     private final static int STARTING_Y = 300;
 
-    boolean isPlayerMovedLeft = false;
-    int xSide = WIDTH;
-
     public Player() {
         super(new Texture(PLAYER_TEXTURE));
 
@@ -42,21 +39,7 @@ public class Player extends Image {
         int yMoveAmount = 25;
         float actionTime = 0.4f;
 
-        if (xMoveAmount < 0 && !isPlayerMovedLeft) {
-            xSide = -WIDTH;
-            this.setWidth(xSide);
-            float x = this.getX();
-            this.setX(x + WIDTH);
-            isPlayerMovedLeft = true;
 
-        } else if(xMoveAmount > 0 && isPlayerMovedLeft) {
-            xSide = WIDTH;
-            this.setWidth(xSide);
-            float x = this.getX();
-            this.setX(x - WIDTH);
-            isPlayerMovedLeft = false;
-
-        }
 
         Action moveAction = Actions.sequence(
             Actions.moveBy(xMoveAmount, yMoveAmount, actionTime, Interpolation.circleOut),
@@ -65,7 +48,6 @@ public class Player extends Image {
         );
 
         int xSizeAmount = MathUtils.random(0,50);
-        if (isPlayerMovedLeft) xSizeAmount = -xSizeAmount;
         int ySizeAmount = abs(xMoveAmount/3);
         Action changeSizeAction = Actions.sequence(
                 Actions.sizeBy(xSizeAmount, ySizeAmount, actionTime, Interpolation.circleOut),

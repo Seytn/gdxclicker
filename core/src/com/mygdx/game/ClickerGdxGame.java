@@ -42,14 +42,6 @@ public class ClickerGdxGame extends Game {
         soundService = new SoundService();
     }
 
-    public boolean isPaused() {
-        return paused;
-    }
-
-
-    public void setPaused(boolean paused) {
-        this.paused = paused;
-    }
 
     public SoundService getSoundService() {
         return soundService;
@@ -58,4 +50,6 @@ public class ClickerGdxGame extends Game {
     public ScoreService getScoreService() {
         return scoreService;
     }
+
+
 }
