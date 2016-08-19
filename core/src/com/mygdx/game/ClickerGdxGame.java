@@ -8,7 +8,7 @@ import com.mygdx.game.service.SoundService;
 public class ClickerGdxGame extends Game {
 
 
-    public static final String GAME_NAME = "Clicker";
+    public static final String GAME_NAME = "Dumb Squirrel";
 
     public static final int WIDTH = 480;
     public static final int HEIGHT = 800;
@@ -49,6 +49,7 @@ public class ClickerGdxGame extends Game {
     public ScoreService getScoreService() {
         return scoreService;
     }
+
 
 
 }
