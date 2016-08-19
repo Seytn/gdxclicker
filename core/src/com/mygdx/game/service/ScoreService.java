@@ -70,4 +70,8 @@ public class ScoreService {
     public void setFear(int fear) {
         this.fear = fear;
     }
+
+    public void removePoints(int penaltyPoints) {
+        points -= penaltyPoints;
+    }
 }

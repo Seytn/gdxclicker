@@ -43,7 +43,7 @@ public class NutsController {
                     }
                 },spawnTime);
             }
-        },0,1f);
+        },0,0.5f);
 
     }
 
@@ -62,6 +62,18 @@ public class NutsController {
                 nut = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, startingX, startingY);
                 break;
             }
+            case ROTTING_NUT: {
+                nut = new NutsObject(NutsObject.NutType.ROTTING_NUT, game, startingX, startingY);
+                break;
+            }
+            case BIG_NUT: {
+                nut = new NutsObject(NutsObject.NutType.BIG_NUT, game, startingX, startingY);
+                break;
+            }
+            case POISON: {
+                nut = new NutsObject(NutsObject.NutType.POISON, game, startingX, startingY);
+                break;
+            }
             default: {
                 nut = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, startingX, startingY);
             }
@@ -72,6 +84,6 @@ public class NutsController {
     }
 
     private void randomizeSpawnTime() {
-        spawnTime = MathUtils.random(1.0f,5.0f);
+        spawnTime = MathUtils.random(0.5f,3.0f);
     }
 }

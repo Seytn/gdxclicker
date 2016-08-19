@@ -16,7 +16,10 @@ public class NutsObject extends Image {
 
     public enum NutType{
         SIMPLE_NUT(90,70),
-        FALLING_NUT(60,110);
+        FALLING_NUT(60,110),
+        ROTTING_NUT(70,110),
+        BIG_NUT(110,85),
+        POISON(70,90);
 
         int width, height;
 
@@ -32,9 +35,11 @@ public class NutsObject extends Image {
 
     }
 
-    public final static String SIMPLE_NUT = "nut.png";
-    public final static String FALLING_NUT = "flying_nut.png";
-
+    public final static String SIMPLE_NUT = "nuts_pictures/nut.png";
+    public final static String FALLING_NUT = "nuts_pictures/flying_nut.png";
+    public final static String ROTTING_NUT = "nuts_pictures/rotting_nut.png";
+    public final static String BIG_NUT = "nuts_pictures/big_nut.png";
+    public final static String PEPPER = "nuts_pictures/pepper.png";
 
     private ClickerGdxGame game;
 
@@ -67,16 +72,8 @@ public class NutsObject extends Image {
     }
 
     private void playSound() {
-        switch(type){
-            case SIMPLE_NUT: {
-                game.getSoundService().playSimpleNutSpawnSound();
-                break;
-            }
-            case FALLING_NUT: {
-                game.getSoundService().playFallingNutSpawnSound();
-                break;
-            }
-        }
+        game.getSoundService().playSimpleNutSpawnSound();
+
     }
 
     public void reactOnClick() {
@@ -88,6 +85,18 @@ public class NutsObject extends Image {
                 }
                 case FALLING_NUT: {
                     game.getScoreService().addPoints(30);
+                    break;
+                }
+                case ROTTING_NUT: {
+                    game.getScoreService().addPoints(50);
+                    break;
+                }
+                case BIG_NUT: {
+                    game.getScoreService().addPoints(50);
+                    break;
+                }
+                case POISON: {
+                    game.getScoreService().removePoints(30);
                     break;
                 }
             }
@@ -112,6 +121,19 @@ public class NutsObject extends Image {
             case FALLING_NUT: {
                 return FALLING_NUT;
             }
+
+            case ROTTING_NUT: {
+                return ROTTING_NUT;
+            }
+
+            case BIG_NUT: {
+                return BIG_NUT;
+            }
+
+            case POISON: {
+                return PEPPER;
+            }
+
             default: return "";
         }
     }
@@ -125,10 +147,11 @@ public class NutsObject extends Image {
         ));
 
         Action fall;
+        float randomDirectionX = MathUtils.random(-50f,50f);
+        float randomDirectionY = MathUtils.random(-50f,50f);
         switch(type) {
             case SIMPLE_NUT: {
-                float randomDirectionX = MathUtils.random(-30f,30f);
-                float randomDirectionY = MathUtils.random(-30f,30f);
+
 
                 fall = Actions.forever(Actions.sequence(
                         Actions.sizeBy(10f, 10f, 0.5f),
@@ -141,7 +164,21 @@ public class NutsObject extends Image {
                 fall = Actions.forever(Actions.moveBy(0, -50, 0.5f));
                 break;
             }
-            default: fall = Actions.forever(Actions.moveBy(0, -50, 0.5f));
+
+            case BIG_NUT: {
+                fall = Actions.forever(Actions.sequence(
+                        Actions.sizeBy(10f, 10f, 0.5f),
+                        Actions.sizeBy(-10f, -10f, 0),
+                        Actions.delay(0.5f)
+                ));
+                break;
+            }
+
+            default: fall = Actions.forever(Actions.sequence(
+                    Actions.sizeBy(10f, 10f, 0.5f),
+                    Actions.sizeBy(-10f, -10f, 0),
+                    Actions.moveBy(randomDirectionX, randomDirectionY, 0.5f)
+            ));
 
         }
 
