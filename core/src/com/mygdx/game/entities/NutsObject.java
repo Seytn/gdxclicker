@@ -96,7 +96,7 @@ public class NutsObject extends Image {
                     break;
                 }
                 case POISON: {
-                    game.getScoreService().removePoints(30);
+                    game.getScoreService().removePoints(100);
                     break;
                 }
             }
