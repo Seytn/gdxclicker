@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.ClickerGdxGame;
+import com.mygdx.game.ui.SimpleEventDialog;
+
 
 /**
  * Created by Kamil on 2016-08-15.
@@ -36,12 +38,13 @@ public class NutsObject extends Image {
     }
 
     public final static String SIMPLE_NUT = "nuts_pictures/nut.png";
+
     public final static String FALLING_NUT = "nuts_pictures/flying_nut.png";
     public final static String ROTTING_NUT = "nuts_pictures/rotting_nut.png";
     public final static String BIG_NUT = "nuts_pictures/big_nut.png";
     public final static String PEPPER = "nuts_pictures/pepper.png";
-
     private ClickerGdxGame game;
+    private SimpleEventDialog poisonClieckedDialog;
 
     private NutType type;
 
@@ -97,6 +100,8 @@ public class NutsObject extends Image {
                 }
                 case POISON: {
                     game.getScoreService().removePoints(100);
+                    game.getSoundService().playNoFearSound();
+                    warnDialog();
                     break;
                 }
             }
@@ -112,6 +117,13 @@ public class NutsObject extends Image {
 
 
     }
+
+    private void warnDialog() {
+        poisonClieckedDialog = new SimpleEventDialog(getStage());
+        poisonClieckedDialog.showMessage("You've clicked a pepper!!! -100pts");
+    }
+
+
 
     private static String getTextureString(NutType type) {
         switch(type){

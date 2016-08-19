@@ -7,6 +7,7 @@ import com.mygdx.game.controllers.NutsController;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
+import com.mygdx.game.ui.SimpleEventDialog;
 import com.mygdx.game.ui.SimpleLabel;
 import com.mygdx.game.ui.ClickCallback;
 
@@ -22,6 +23,7 @@ public class GameplayScreen extends AbstractScreen{
     private SimpleLabel scoreLabel;
     private SimpleLabel fearLabel;
     private NutsController nutsController;
+    private SimpleEventDialog startGameDialog;
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -39,6 +41,12 @@ public class GameplayScreen extends AbstractScreen{
         initFearlabel();
         initNutsController();
         initMusic();
+        initStartGameDialog();
+    }
+
+    private void initStartGameDialog() {
+        startGameDialog = new SimpleEventDialog(stage);
+        startGameDialog.showMessage("Hit hard to punish the squirrel!");
     }
 
     private void initMusic() {
