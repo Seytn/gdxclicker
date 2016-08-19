@@ -80,18 +80,28 @@ public class NutsObject extends Image {
     }
 
     public void reactOnClick() {
-        switch(type){
-            case SIMPLE_NUT: {
-                game.getScoreService().addPoints(10);
-                break;
+        if (game.getScoreService().getFear() > 0) {
+            switch(type){
+                case SIMPLE_NUT: {
+                    game.getScoreService().addPoints(10);
+                    break;
+                }
+                case FALLING_NUT: {
+                    game.getScoreService().addPoints(30);
+                    break;
+                }
             }
-            case FALLING_NUT: {
-                game.getScoreService().addPoints(30);
-                break;
-            }
+            game.getSoundService().playEatSound();
+            game.getScoreService().fearDecrase();
+            NutsObject.this.remove();
+
+        } else {
+            // TODO what if fear == 0
+            game.getSoundService().playNoFearSound();
         }
-        game.getSoundService().playEatSound();
-        NutsObject.this.remove();
+
+
+
     }
 
     private static String getTextureString(NutType type) {

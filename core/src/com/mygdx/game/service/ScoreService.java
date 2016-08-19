@@ -38,6 +38,15 @@ public class ScoreService {
 
 
 
+    public void fearDecrase() {
+        fear -= 5;
+    }
+
+    public void increaseFear() {
+        fear += 10;
+    }
+
+
     public void resetScore() {
         points = 0;
         fear = 0;
@@ -53,7 +62,12 @@ public class ScoreService {
         return points;
     }
 
+
     public int getFear() {
         return fear;
+    }
+
+    public void setFear(int fear) {
+        this.fear = fear;
     }
 }

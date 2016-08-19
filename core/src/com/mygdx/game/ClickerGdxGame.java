@@ -17,7 +17,6 @@ public class ClickerGdxGame extends Game {
 
     private ScoreService scoreService;
 
-    private boolean paused;
 
     @Override
     public void create() {

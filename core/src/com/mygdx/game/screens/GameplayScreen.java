@@ -100,7 +100,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initPlayer() {
-        player = new Player();
+        player = new Player(game);
         stage.addActor(player);
     }
 

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.mygdx.game.ClickerGdxGame;
 
 import static java.lang.Math.abs;
 
@@ -21,9 +22,12 @@ public class Player extends Image {
 
     private final static int STARTING_X = 85;
     private final static int STARTING_Y = 300;
+    private final ClickerGdxGame game;
 
-    public Player() {
+    public Player(ClickerGdxGame game) {
         super(new Texture(PLAYER_TEXTURE));
+
+        this.game = game;
 
         this.setOrigin(WIDTH/2, HEIGHT/2);
         this.setSize(WIDTH, HEIGHT);
@@ -58,6 +62,11 @@ public class Player extends Image {
         this.addAction(moveAction);
         this.addAction(changeSizeAction);
 
-
+        int actualAmountOfFear = game.getScoreService().getFear();
+        if (actualAmountOfFear <= 90) {
+            game.getScoreService().increaseFear();
+        } else if (actualAmountOfFear < 100){
+            game.getScoreService().setFear(100);
+        }
     }
 }

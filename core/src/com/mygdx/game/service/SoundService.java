@@ -13,6 +13,7 @@ public class SoundService {
 
     private Sound simpleNutSound, fallingNutSound, playerClickSound;
     private Sound eatSound;
+    private Sound noFearSound;
 
     public SoundService() {
         init();
@@ -24,6 +25,7 @@ public class SoundService {
         fallingNutSound = Gdx.audio.newSound(Gdx.files.internal("sounds/show.mp3"));
         playerClickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/punch.wav"));
         eatSound = Gdx.audio.newSound(Gdx.files.internal("sounds/eat.mp3"));
+        noFearSound = Gdx.audio.newSound(Gdx.files.internal("sounds/gameover.mp3"));
 
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 
@@ -50,5 +52,9 @@ public class SoundService {
 
     public void playEatSound(){
         eatSound.play(0.3f);
+    }
+
+    public void playNoFearSound() {
+        noFearSound.play(0.3f);
     }
 }
