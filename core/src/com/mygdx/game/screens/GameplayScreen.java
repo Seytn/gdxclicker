@@ -8,7 +8,7 @@ import com.mygdx.game.entities.Player;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
 import com.mygdx.game.ui.SimpleLabel;
-import com.mygdx.game.ui.clickCallback;
+import com.mygdx.game.ui.ClickCallback;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -71,7 +71,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initPlayerButton() {
-        playerButton = new PlayerButton(new clickCallback() {
+        playerButton = new PlayerButton(new ClickCallback() {
             @Override
             public void onClick() {
                 player.reactOnClick();
@@ -87,7 +87,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initResetScoreButton() {
-        resetScoreButon = new ResetScoreButton(new clickCallback() {
+        resetScoreButon = new ResetScoreButton(new ClickCallback() {
             @Override
             public void onClick() {
                 game.getScoreService().resetScore();

@@ -10,13 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class PlayerButton extends Button {
 
 
-    public PlayerButton(final clickCallback callback) {
+    public PlayerButton(final ClickCallback callback) {
         super(new ButtonStyle());
         init(callback);
 
     }
 
-    private void init(final clickCallback callback) {
+    private void init(final ClickCallback callback) {
         this.setWidth(460);
         this.setHeight(360);
         this.setX(10);
