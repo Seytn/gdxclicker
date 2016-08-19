@@ -7,7 +7,7 @@ import com.mygdx.game.controllers.NutsController;
 import com.mygdx.game.entities.Player;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
-import com.mygdx.game.ui.ScoreLabel;
+import com.mygdx.game.ui.SimpleLabel;
 import com.mygdx.game.ui.clickCallback;
 
 /**
@@ -19,7 +19,8 @@ public class GameplayScreen extends AbstractScreen{
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
-    private ScoreLabel scoreLabel;
+    private SimpleLabel scoreLabel;
+    private SimpleLabel fearLabel;
     private NutsController nutsController;
 
     public GameplayScreen(ClickerGdxGame game) {
@@ -35,6 +36,7 @@ public class GameplayScreen extends AbstractScreen{
         initPlayerButton();
         initResetScoreButton();
         initScoreLabel();
+        initFearlabel();
         initNutsController();
         initMusic();
     }
@@ -48,17 +50,24 @@ public class GameplayScreen extends AbstractScreen{
 
     }
 
-
     private void initBackground() {
         backgroundImg = new Image(new Texture("background_gameplay.png"));
 
         stage.addActor(backgroundImg);
     }
 
+
     private void initScoreLabel() {
-        scoreLabel = new ScoreLabel("Points: " + String.valueOf(game.getScoreService().getPoints()));
+        scoreLabel = new SimpleLabel("Points: " + String.valueOf(game.getScoreService().getPoints()));
 
         stage.addActor(scoreLabel);
+    }
+
+    private void initFearlabel() {
+        fearLabel = new SimpleLabel("Fear: " + String.valueOf(game.getScoreService().getFear()));
+        fearLabel.setY(630);
+
+        stage.addActor(fearLabel);
     }
 
     private void initPlayerButton() {
@@ -68,7 +77,7 @@ public class GameplayScreen extends AbstractScreen{
                 player.reactOnClick();
                 game.getSoundService().playPlayerClickSound();
                 game.getScoreService().addPoint();
-                updateScoreLabel();
+                updateLabels();
             }
         });
 
@@ -82,7 +91,7 @@ public class GameplayScreen extends AbstractScreen{
             @Override
             public void onClick() {
                 game.getScoreService().resetScore();
-                updateScoreLabel();
+                updateLabels();
             }
         });
 
@@ -108,12 +117,13 @@ public class GameplayScreen extends AbstractScreen{
     }
 
 
-    public void updateScoreLabel() {
+    public void updateLabels() {
         scoreLabel.setText("Points: " + String.valueOf(game.getScoreService().getPoints()));
+        fearLabel.setText("Fear: " + String.valueOf(game.getScoreService().getFear()));
     }
 
     private void update() {
-        updateScoreLabel();
+        updateLabels();
         stage.act();
     }
 }

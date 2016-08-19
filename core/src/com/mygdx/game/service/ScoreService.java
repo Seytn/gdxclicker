@@ -9,10 +9,13 @@ import com.badlogic.gdx.Preferences;
 public class ScoreService {
     public static final String GAME_PREFS = "com.mygdx.game.prefs";
     public static final String GAME_SCORE = "com.mygdx.game.score";
+    public static final String GAME_FEAR = "com.mygdx.game.fear";
 
     private int points;
+    private int fear;
 
     private Preferences prefs;
+
     public ScoreService() {
         init();
 
@@ -21,6 +24,8 @@ public class ScoreService {
     private void init() {
         prefs = Gdx.app.getPreferences(GAME_PREFS);
         points = prefs.getInteger(GAME_SCORE);
+        fear = prefs.getInteger(GAME_FEAR);
+
     }
 
     public void addPoint(){
@@ -31,16 +36,24 @@ public class ScoreService {
         points += nutPoints;
     }
 
+
+
     public void resetScore() {
         points = 0;
+        fear = 0;
     }
 
     public void updateSavedScore() {
         prefs.putInteger(GAME_SCORE, points);
+        prefs.putInteger(GAME_FEAR, fear);
         prefs.flush();
     }
 
     public int getPoints() {
         return points;
+    }
+
+    public int getFear() {
+        return fear;
     }
 }
