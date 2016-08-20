@@ -71,7 +71,7 @@ public class ScoreService {
         this.fear = fear;
     }
 
-    public void removePoints(int penaltyPoints) {
-        points -= penaltyPoints;
+    public void halvePoints() {
+        points -= points/2;
     }
 }

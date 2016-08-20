@@ -99,7 +99,7 @@ public class NutsObject extends Image {
                     break;
                 }
                 case POISON: {
-                    game.getScoreService().removePoints(100);
+                    game.getScoreService().halvePoints();
                     game.getSoundService().playNoFearSound();
                     warnDialog();
                     break;
@@ -120,7 +120,7 @@ public class NutsObject extends Image {
 
     private void warnDialog() {
         poisonClieckedDialog = new SimpleEventDialog(getStage());
-        poisonClieckedDialog.showMessage("You've clicked a pepper!!! -100pts");
+        poisonClieckedDialog.showMessage("You've clicked a pepper!!! Points halved!");
         Action disapearAction = Actions.sequence(
                 Actions.delay(0.5f),
                 new Action(){
