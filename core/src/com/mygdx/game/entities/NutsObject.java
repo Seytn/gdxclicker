@@ -135,7 +135,7 @@ public class NutsObject extends Image {
     private void warnDialog() {
         poisonClieckedDialog = new SimpleEventDialog(getStage());
         poisonClieckedDialog.showMessage("You've clicked a pepper!!! Points halved!");
-        Action disapearAction = Actions.sequence(
+        Action disappearAction = Actions.sequence(
                 Actions.delay(0.5f),
                 new Action(){
                     @Override
@@ -147,7 +147,7 @@ public class NutsObject extends Image {
 
 
         );
-        poisonClieckedDialog.addAction(disapearAction);
+        poisonClieckedDialog.addAction(disappearAction);
     }
 
 
