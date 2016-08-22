@@ -16,7 +16,7 @@ public class Player extends Image {
 
     public final static String PLAYER_TEXTURE = "player.png";
 
-    private final static int WIDTH = 150;koordynaty
+    private final static int WIDTH = 150;
     private final static int HEIGHT = 141;
 
     private final static int STARTING_X = 35;
