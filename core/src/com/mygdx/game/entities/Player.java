@@ -62,11 +62,6 @@ public class Player extends Image {
         this.addAction(moveAction);
         this.addAction(changeSizeAction);
 
-        int actualAmountOfFear = game.getScoreService().getFear();
-        if (actualAmountOfFear <= 90) {
-            game.getScoreService().increaseFear();
-        } else if (actualAmountOfFear < 100){
-            game.getScoreService().setFear(100);
-        }
+
     }
 }
