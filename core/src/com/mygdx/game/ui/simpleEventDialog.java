@@ -15,10 +15,11 @@ public class SimpleEventDialog extends Image {
 
     public final static String DIALOG_START_GAME = "dialog_start_game.png";
     public final static String DIALOG_LOSE_POINTS = "dialog_lose_points.png";
+    public static final String DIALOG_NO_FEAR = "dialog_no_fear.png";
 
     private final static int WIDTH = 350;
-    private final static int HEIGHT = 100;
 
+    private final static int HEIGHT = 100;
     private final static int STARTING_X = 50;
     private final static int STARTING_Y = 400;
 

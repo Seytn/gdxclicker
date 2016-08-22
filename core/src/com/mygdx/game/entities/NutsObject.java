@@ -1,12 +1,14 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.ui.SimpleEventDialog;
 
@@ -42,12 +44,16 @@ public class NutsObject extends Image {
     public final static String FALLING_NUT = "nuts_pictures/flying_nut.png";
     public final static String ROTTING_NUT = "nuts_pictures/rotting_nut.png";
     public final static String BIG_NUT = "nuts_pictures/big_nut.png";
+    public final static String BIG_NUT_CRACKED1 = "nuts_pictures/big_nut_cracked1.png";
+    public final static String BIG_NUT_CRACKED2 = "nuts_pictures/big_nut_cracked2.png";
     public final static String PEPPER = "nuts_pictures/pepper.png";
     private ClickerGdxGame game;
     private SimpleEventDialog poisonClieckedDialog;
+    private SimpleEventDialog noFearDialog;
 
     private NutType type;
     private int bigNutCounter = 0;
+
 
     public NutsObject(NutType type, final ClickerGdxGame game, int startingX, int startingY) {
         super(new Texture(getTextureString(type)));
@@ -101,10 +107,15 @@ public class NutsObject extends Image {
                 case BIG_NUT: {
                     bigNutCounter++;
                     game.getScoreService().fearDecrease();
+
                     if (bigNutCounter >=3){
                         game.getScoreService().addPoints(50);
                         nutEatAndRemove();
+                        break;
                     }
+
+                    changeTexture(bigNutCounter);
+                    game.getSoundService().playPlayerClickSound();
                     break;
                 }
                 case POISON: {
@@ -118,10 +129,29 @@ public class NutsObject extends Image {
 
 
         } else {
-            // TODO what if fear == 0
+            noFearDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_NO_FEAR);
+            getStage().addActor(noFearDialog);
+            noFearDialog.fadeOutDialog(1.0f);
             game.getSoundService().playNoFearSound();
         }
 
+
+
+    }
+
+    private void changeTexture(int bigNutCounter) {
+        switch (bigNutCounter){
+            case 1: {
+                Texture newTexture = new Texture(BIG_NUT_CRACKED1);
+                this.setDrawable(new SpriteDrawable(new Sprite(newTexture)));
+                break;
+            }
+            case 2: {
+                Texture newTexture = new Texture(BIG_NUT_CRACKED2);
+                this.setDrawable(new SpriteDrawable(new Sprite(newTexture)));
+            }
+            default: break;
+        }
 
 
     }
