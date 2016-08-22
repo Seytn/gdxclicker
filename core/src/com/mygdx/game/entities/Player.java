@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.mygdx.game.ClickerGdxGame;
 
 import static java.lang.Math.abs;
 
@@ -17,17 +16,15 @@ public class Player extends Image {
 
     public final static String PLAYER_TEXTURE = "player.png";
 
-    private final static int WIDTH = 150;
+    private final static int WIDTH = 150;koordynaty
     private final static int HEIGHT = 141;
 
-    private final static int STARTING_X = 85;
-    private final static int STARTING_Y = 300;
-    private final ClickerGdxGame game;
+    private final static int STARTING_X = 35;
+    private final static int STARTING_Y = 100;
 
-    public Player(ClickerGdxGame game) {
+    public Player() {
         super(new Texture(PLAYER_TEXTURE));
 
-        this.game = game;
 
         this.setOrigin(WIDTH/2, HEIGHT/2);
         this.setSize(WIDTH, HEIGHT);
@@ -52,7 +49,7 @@ public class Player extends Image {
         );
 
         int xSizeAmount = MathUtils.random(0,50);
-        int ySizeAmount = abs(xMoveAmount/3);
+        float ySizeAmount = abs(xMoveAmount/3);
         Action changeSizeAction = Actions.sequence(
                 Actions.sizeBy(xSizeAmount, ySizeAmount, actionTime, Interpolation.circleOut),
                 Actions.sizeBy(-xSizeAmount, -ySizeAmount, actionTime, Interpolation.circleIn)

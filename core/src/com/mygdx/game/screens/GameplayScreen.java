@@ -86,12 +86,14 @@ public class GameplayScreen extends AbstractScreen{
                 player.reactOnClick();
                 game.getSoundService().playPlayerClickSound();
                 game.getScoreService().addPoint();
+
                 int actualAmountOfFear = game.getScoreService().getFear();
                 if (actualAmountOfFear <= 90) {
                     game.getScoreService().increaseFear();
                 } else if (actualAmountOfFear < 100){
                     game.getScoreService().setFear(100);
                 }
+
                 updateLabels();
             }
         });
@@ -115,7 +117,7 @@ public class GameplayScreen extends AbstractScreen{
     }
 
     private void initPlayer() {
-        player = new Player(game);
+        player = new Player();
         stage.addActor(player);
     }
 

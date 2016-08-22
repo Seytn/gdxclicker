@@ -50,6 +50,7 @@ public class ScoreService {
     public void resetScore() {
         points = 0;
         fear = 0;
+
     }
 
     public void updateSavedScore() {
