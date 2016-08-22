@@ -13,19 +13,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class SimpleEventDialog extends Image {
 
-    public final static String DIALOG_TEXTURE = "dialog.png";
+    public final static String DIALOG_START_GAME = "dialog_start_game.png";
+    public final static String DIALOG_LOSE_POINTS = "dialog_lose_points.png";
 
     private final static int WIDTH = 350;
-    private final static int HEIGHT = 70;
+    private final static int HEIGHT = 100;
 
     private final static int STARTING_X = 50;
     private final static int STARTING_Y = 400;
 
-    SimpleLabel label;
     Stage stage;
 
-    public SimpleEventDialog(Stage stage) {
-        super(new Texture(DIALOG_TEXTURE));
+
+    public SimpleEventDialog(Stage stage, String textureType) {
+        super(new Texture(textureType));
 
         this.stage = stage;
         this.setOrigin(WIDTH/2, HEIGHT/2);
@@ -37,41 +38,30 @@ public class SimpleEventDialog extends Image {
     }
 
     private void init() {
-        label = new SimpleLabel("");
-        label.setPosition(STARTING_X + 30, STARTING_Y + 5);
-
 
         this.addListener(new ClickListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                fadeOutDialog();
+                fadeOutDialog(0.5f);
 
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
     }
 
-    public void showMessage(String text) {
-        stage.addActor(this);
-        label.setText(text);
-        label.setFontScale(1.2f);
-        this.getStage().addActor(label);
-    }
 
-    public void fadeOutDialog() {
-        Action disapear = Actions.sequence(
-                Actions.fadeOut(0.3f),
+    public void fadeOutDialog(float v) {
+        Action disappear = Actions.sequence(
+                Actions.fadeOut(v),
                 new Action() {
                     @Override
                     public boolean act(float delta) {
                         SimpleEventDialog.this.remove();
-                        label.remove();
                         return false;
                     }
                 }
         );
-        this.addAction(disapear);
-        label.addAction(Actions.fadeOut(0.3f));
+        this.addAction(disappear);
     }
 }

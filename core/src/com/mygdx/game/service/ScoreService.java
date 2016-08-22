@@ -38,7 +38,7 @@ public class ScoreService {
 
 
 
-    public void fearDecrase() {
+    public void fearDecrease() {
         fear -= 5;
     }
 

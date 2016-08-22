@@ -38,15 +38,16 @@ public class GameplayScreen extends AbstractScreen{
         initPlayerButton();
         initResetScoreButton();
         initScoreLabel();
-        initFearlabel();
+        initFearLabel();
         initNutsController();
         initMusic();
         initStartGameDialog();
     }
 
     private void initStartGameDialog() {
-        startGameDialog = new SimpleEventDialog(stage);
-        startGameDialog.showMessage("Hit hard to punish the squirrel!");
+        startGameDialog = new SimpleEventDialog(stage, SimpleEventDialog.DIALOG_START_GAME);
+        stage.addActor(startGameDialog);
+        startGameDialog.fadeOutDialog(2.5f);
     }
 
     private void initMusic() {
@@ -71,7 +72,7 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(scoreLabel);
     }
 
-    private void initFearlabel() {
+    private void initFearLabel() {
         fearLabel = new SimpleLabel("Fear: " + String.valueOf(game.getScoreService().getFear()));
         fearLabel.setY(630);
 

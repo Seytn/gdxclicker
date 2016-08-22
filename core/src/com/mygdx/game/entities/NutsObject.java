@@ -100,7 +100,7 @@ public class NutsObject extends Image {
                 }
                 case BIG_NUT: {
                     bigNutCounter++;
-                    game.getScoreService().fearDecrase();
+                    game.getScoreService().fearDecrease();
                     if (bigNutCounter >=3){
                         game.getScoreService().addPoints(50);
                         nutEatAndRemove();
@@ -128,26 +128,15 @@ public class NutsObject extends Image {
 
     private void nutEatAndRemove() {
         game.getSoundService().playEatSound();
-        game.getScoreService().fearDecrase();
+        game.getScoreService().fearDecrease();
         NutsObject.this.remove();
     }
 
     private void warnDialog() {
-        poisonClieckedDialog = new SimpleEventDialog(getStage());
-        poisonClieckedDialog.showMessage("You've clicked a pepper!!! Points halved!");
-        Action disappearAction = Actions.sequence(
-                Actions.delay(0.5f),
-                new Action(){
-                    @Override
-                    public boolean act(float delta) {
-                        poisonClieckedDialog.fadeOutDialog();
-                        return false;
-                    }
-                }
+        poisonClieckedDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_LOSE_POINTS);
+        getStage().addActor(poisonClieckedDialog);
+        poisonClieckedDialog.fadeOutDialog(1.0f);
 
-
-        );
-        poisonClieckedDialog.addAction(disappearAction);
     }
 
 
