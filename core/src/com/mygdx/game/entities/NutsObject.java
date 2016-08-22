@@ -47,6 +47,7 @@ public class NutsObject extends Image {
     private SimpleEventDialog poisonClieckedDialog;
 
     private NutType type;
+    private int bigNutCounter = 0;
 
     public NutsObject(NutType type, final ClickerGdxGame game, int startingX, int startingY) {
         super(new Texture(getTextureString(type)));
@@ -84,30 +85,37 @@ public class NutsObject extends Image {
             switch(type){
                 case SIMPLE_NUT: {
                     game.getScoreService().addPoints(10);
+                    nutEatAndRemove();
                     break;
                 }
                 case FALLING_NUT: {
                     game.getScoreService().addPoints(30);
+                    nutEatAndRemove();
                     break;
                 }
                 case ROTTING_NUT: {
                     game.getScoreService().addPoints(50);
+                    nutEatAndRemove();
                     break;
                 }
                 case BIG_NUT: {
-                    game.getScoreService().addPoints(50);
+                    bigNutCounter++;
+                    game.getScoreService().fearDecrase();
+                    if (bigNutCounter >=3){
+                        game.getScoreService().addPoints(50);
+                        nutEatAndRemove();
+                    }
                     break;
                 }
                 case POISON: {
                     game.getScoreService().halvePoints();
                     game.getSoundService().playNoFearSound();
                     warnDialog();
+                    nutEatAndRemove();
                     break;
                 }
             }
-            game.getSoundService().playEatSound();
-            game.getScoreService().fearDecrase();
-            NutsObject.this.remove();
+
 
         } else {
             // TODO what if fear == 0
@@ -116,6 +124,12 @@ public class NutsObject extends Image {
 
 
 
+    }
+
+    private void nutEatAndRemove() {
+        game.getSoundService().playEatSound();
+        game.getScoreService().fearDecrase();
+        NutsObject.this.remove();
     }
 
     private void warnDialog() {
