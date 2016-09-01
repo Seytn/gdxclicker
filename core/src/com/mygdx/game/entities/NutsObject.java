@@ -48,7 +48,7 @@ public class NutsObject extends Image {
     public final static String BIG_NUT_CRACKED2 = "nuts_pictures/big_nut_cracked2.png";
     public final static String PEPPER = "nuts_pictures/pepper.png";
     private ClickerGdxGame game;
-    private SimpleEventDialog poisonClieckedDialog;
+    private SimpleEventDialog poisonClickedDialog;
     private SimpleEventDialog noFearDialog;
 
     private NutType type;
@@ -163,9 +163,9 @@ public class NutsObject extends Image {
     }
 
     private void warnDialog() {
-        poisonClieckedDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_LOSE_POINTS);
-        getStage().addActor(poisonClieckedDialog);
-        poisonClieckedDialog.fadeOutDialog(1.0f);
+        poisonClickedDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_LOSE_POINTS);
+        getStage().addActor(poisonClickedDialog);
+        poisonClickedDialog.fadeOutDialog(1.0f);
 
     }
 

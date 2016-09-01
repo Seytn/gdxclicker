@@ -20,10 +20,10 @@ public class ResetScoreButton extends Button {
     }
 
     private void init(final ClickCallback callback) {
-        this.setWidth(100);
-        this.setHeight(100);
-        this.setX(370);
-        this.setY(670);
+        this.setWidth(200);
+        this.setHeight(90);
+        this.setX(270);
+        this.setY(700);
 
         this.addListener(new ClickListener(){
             @Override
@@ -37,10 +37,10 @@ public class ResetScoreButton extends Button {
     }
 
     private static ButtonStyle prepareResetButtonStyle() {
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("ui-orange.atlas"));
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("button_reset.atlas"));
         Skin skin = new Skin(atlas);
         ButtonStyle buttonStyle = new ButtonStyle();
-        buttonStyle.up = skin.getDrawable("color_lightwidgettext");
+        buttonStyle.up = skin.getDrawable("button_02");
         buttonStyle.down = skin.getDrawable("button_01");
 
         return buttonStyle;
