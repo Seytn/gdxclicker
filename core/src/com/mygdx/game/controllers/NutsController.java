@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.entities.NutsObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by Kamil on 2016-08-15.
  */
@@ -14,6 +16,9 @@ public class NutsController {
     private float spawnTime;
     ClickerGdxGame game;
     Stage stage;
+
+    ArrayList<NutsObject> nutList = new ArrayList<NutsObject>();
+
 
     NutsObject nut;
     int startingX;
@@ -78,12 +83,19 @@ public class NutsController {
                 nut = new NutsObject(NutsObject.NutType.SIMPLE_NUT, game, startingX, startingY);
             }
         }
-
+        nutList.add(nut);
         stage.addActor(nut);
         nut.tremble();
     }
 
     private void randomizeSpawnTime() {
         spawnTime = MathUtils.random(0.5f,3.0f);
+    }
+
+    public void eraseNuts(){
+        for (NutsObject o : nutList){
+            o.remove();
+        }
+        nutList.clear();
     }
 }

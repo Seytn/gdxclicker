@@ -108,6 +108,7 @@ public class GameplayScreen extends AbstractScreen{
             @Override
             public void onClick() {
                 game.getScoreService().resetScore();
+                nutsController.eraseNuts();
                 updateLabels();
             }
         });
