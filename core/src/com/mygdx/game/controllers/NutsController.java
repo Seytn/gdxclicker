@@ -35,20 +35,22 @@ public class NutsController {
     private void init() {
 
 
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                randomizeSpawnTime();
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    randomizeSpawnTime();
 
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        addNutToStage();
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            if(!game.isPaused) {
+                                addNutToStage();
+                            }
 
-                    }
-                },spawnTime);
-            }
-        },0,0.5f);
+                        }
+                    }, spawnTime);
+                }
+            }, 0, 0.5f);
 
     }
 

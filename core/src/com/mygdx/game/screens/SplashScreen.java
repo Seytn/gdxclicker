@@ -1,6 +1,9 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.ClickerGdxGame;
 
@@ -10,6 +13,7 @@ import com.mygdx.game.ClickerGdxGame;
 public class SplashScreen extends AbstractScreen {
 
         private Texture splashImg;
+        private Button button;
 
     public SplashScreen(final ClickerGdxGame game) {
         super(game);
@@ -26,6 +30,19 @@ public class SplashScreen extends AbstractScreen {
     protected void init() {
         //TODO implement assets manager
         splashImg = new Texture("background_splash.png");
+        button = new Button();
+        button.setWidth(ClickerGdxGame.WIDTH);
+        button.setHeight(ClickerGdxGame.HEIGHT);
+        button.setX(0);
+        button.setY(0);
+        button.addListener(new ClickListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new GameplayScreen(game));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+        stage.addActor(button);
     }
 
     @Override

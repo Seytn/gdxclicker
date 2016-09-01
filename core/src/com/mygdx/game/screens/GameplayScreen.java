@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.controllers.NutsController;
 import com.mygdx.game.entities.Player;
+import com.mygdx.game.ui.PauseGameButton;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
 import com.mygdx.game.ui.SimpleEventDialog;
@@ -20,10 +21,12 @@ public class GameplayScreen extends AbstractScreen{
     private Player player;
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
+    private PauseGameButton pauseGameButton;
     private SimpleLabel scoreLabel;
     private SimpleLabel fearLabel;
     private NutsController nutsController;
     private SimpleEventDialog startGameDialog;
+
 
     public GameplayScreen(ClickerGdxGame game) {
         super(game);
@@ -37,6 +40,7 @@ public class GameplayScreen extends AbstractScreen{
         initPlayer();
         initPlayerButton();
         initResetScoreButton();
+        initPauseGameButton();
         initScoreLabel();
         initFearLabel();
         initNutsController();
@@ -65,12 +69,12 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(backgroundImg);
     }
 
-
     private void initScoreLabel() {
         scoreLabel = new SimpleLabel("Points: " + String.valueOf(game.getScoreService().getPoints()));
 
         stage.addActor(scoreLabel);
     }
+
 
     private void initFearLabel() {
         fearLabel = new SimpleLabel("Fear: " + String.valueOf(game.getScoreService().getFear()));
@@ -86,7 +90,6 @@ public class GameplayScreen extends AbstractScreen{
                 player.reactOnClick();
                 game.getSoundService().playPlayerClickSound();
                 game.getScoreService().addPoint();
-
                 int actualAmountOfFear = game.getScoreService().getFear();
                 if (actualAmountOfFear <= 90) {
                     game.getScoreService().increaseFear();
@@ -101,6 +104,18 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(playerButton);
 
 
+    }
+
+    private void initPauseGameButton() {
+        pauseGameButton = new PauseGameButton(new ClickCallback() {
+            @Override
+            public void onClick() {
+                if(!game.isPaused) {
+                    game.setPaused(true);
+                } else game.setPaused(false);
+            }
+        });
+        stage.addActor(pauseGameButton);
     }
 
     private void initResetScoreButton() {
@@ -142,6 +157,8 @@ public class GameplayScreen extends AbstractScreen{
 
     private void update() {
         updateLabels();
-        stage.act();
+        if(!game.isPaused) {
+            stage.act();
+        }
     }
 }

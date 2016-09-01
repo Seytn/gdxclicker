@@ -87,55 +87,56 @@ public class NutsObject extends Image {
     }
 
     public void reactOnClick() {
-        if (game.getScoreService().getFear() > 0) {
-            switch(type){
-                case SIMPLE_NUT: {
-                    game.getScoreService().addPoints(10);
-                    nutEatAndRemove();
-                    break;
-                }
-                case FALLING_NUT: {
-                    game.getScoreService().addPoints(30);
-                    nutEatAndRemove();
-                    break;
-                }
-                case ROTTING_NUT: {
-                    game.getScoreService().addPoints(50);
-                    nutEatAndRemove();
-                    break;
-                }
-                case BIG_NUT: {
-                    bigNutCounter++;
-                    game.getScoreService().fearDecrease();
-
-                    if (bigNutCounter >=3){
+        if(!game.isPaused) {
+            if (game.getScoreService().getFear() > 0) {
+                switch (type) {
+                    case SIMPLE_NUT: {
+                        game.getScoreService().addPoints(10);
+                        nutEatAndRemove();
+                        break;
+                    }
+                    case FALLING_NUT: {
+                        game.getScoreService().addPoints(30);
+                        nutEatAndRemove();
+                        break;
+                    }
+                    case ROTTING_NUT: {
                         game.getScoreService().addPoints(50);
                         nutEatAndRemove();
                         break;
                     }
+                    case BIG_NUT: {
+                        bigNutCounter++;
+                        game.getScoreService().fearDecrease();
 
-                    changeTexture(bigNutCounter);
-                    game.getSoundService().playPlayerClickSound();
-                    break;
+                        if (bigNutCounter >= 3) {
+                            game.getScoreService().addPoints(50);
+                            nutEatAndRemove();
+                            break;
+                        }
+
+                        changeTexture(bigNutCounter);
+                        game.getSoundService().playPlayerClickSound();
+                        break;
+                    }
+                    case POISON: {
+                        game.getScoreService().halvePoints();
+                        game.getSoundService().playNoFearSound();
+                        warnDialog();
+                        nutEatAndRemove();
+                        break;
+                    }
                 }
-                case POISON: {
-                    game.getScoreService().halvePoints();
-                    game.getSoundService().playNoFearSound();
-                    warnDialog();
-                    nutEatAndRemove();
-                    break;
-                }
+
+
+            } else {
+                noFearDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_NO_FEAR);
+                getStage().addActor(noFearDialog);
+                noFearDialog.fadeOutDialog(1.0f);
+                game.getSoundService().playNoFearSound();
             }
 
-
-        } else {
-            noFearDialog = new SimpleEventDialog(getStage(), SimpleEventDialog.DIALOG_NO_FEAR);
-            getStage().addActor(noFearDialog);
-            noFearDialog.fadeOutDialog(1.0f);
-            game.getSoundService().playNoFearSound();
         }
-
-
 
     }
 
