@@ -5,12 +5,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.mygdx.game.ClickerGdxGame;
 import com.mygdx.game.controllers.NutsController;
 import com.mygdx.game.entities.Player;
+import com.mygdx.game.ui.ClickCallback;
 import com.mygdx.game.ui.PauseGameButton;
 import com.mygdx.game.ui.PlayerButton;
 import com.mygdx.game.ui.ResetScoreButton;
+import com.mygdx.game.ui.ResumeGameButton;
 import com.mygdx.game.ui.SimpleEventDialog;
 import com.mygdx.game.ui.SimpleLabel;
-import com.mygdx.game.ui.ClickCallback;
 
 /**
  * Created by Kamil on 2016-08-09.
@@ -22,6 +23,7 @@ public class GameplayScreen extends AbstractScreen{
     private PlayerButton playerButton;
     private ResetScoreButton resetScoreButon;
     private PauseGameButton pauseGameButton;
+    private ResumeGameButton resumeGameButton;
     private SimpleLabel scoreLabel;
     private SimpleLabel fearLabel;
     private NutsController nutsController;
@@ -41,6 +43,7 @@ public class GameplayScreen extends AbstractScreen{
         initPlayerButton();
         initResetScoreButton();
         initPauseGameButton();
+        initResumeGameButton();
         initScoreLabel();
         initFearLabel();
         initNutsController();
@@ -75,13 +78,13 @@ public class GameplayScreen extends AbstractScreen{
         stage.addActor(scoreLabel);
     }
 
-
     private void initFearLabel() {
         fearLabel = new SimpleLabel("Fear: " + String.valueOf(game.getScoreService().getFear()));
         fearLabel.setY(630);
 
         stage.addActor(fearLabel);
     }
+
 
     private void initPlayerButton() {
         playerButton = new PlayerButton(new ClickCallback() {
@@ -106,12 +109,23 @@ public class GameplayScreen extends AbstractScreen{
 
     }
 
+    private void initResumeGameButton() {
+        resumeGameButton = new ResumeGameButton(new ClickCallback() {
+            @Override
+            public void onClick() {
+                game.setPaused(false);
+                resumeGameButton.remove();
+            }
+        });
+    }
+
     private void initPauseGameButton() {
         pauseGameButton = new PauseGameButton(new ClickCallback() {
             @Override
             public void onClick() {
                 if(!game.isPaused) {
                     game.setPaused(true);
+                    stage.addActor(resumeGameButton);
                 } else game.setPaused(false);
             }
         });
